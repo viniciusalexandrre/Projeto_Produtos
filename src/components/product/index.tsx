@@ -5,14 +5,22 @@ import { collection, doc, getDocs } from 'firebase/firestore'
 import { db } from '../../../config/firebase-config'
 import styles from '@/components/product/product.module.scss'
 import Image from 'next/image'
-import ImageBackground from '../../../public/images/desktop/desktop_project 1.jpg'
+import ImageProduct from '../../../public/images/desktop/desktop_project 1.png'
 import Link from 'next/link'
+import localFont from 'next/font/local'
+import { font_primary } from '@/app/page'
 
-// const font_secondary = localFont({
-//   src: './'
-// })
+const font_secondary = localFont({
+  src: '../../app/fonts/mona-sans/TTF/Mona-Sans-Regular.ttf',
+  display: 'swap',
+})
 
-interface Product {
+const font_button = localFont({
+  src: '../../app/fonts/mona-sans/TTF/Mona-Sans-SemiBoldWide.ttf',
+  display: 'swap',
+})
+
+export interface Product {
   id: string
   name: string
   equipamento: string
@@ -42,28 +50,37 @@ const ContainerProducts = () => {
   console.log(productList)
 
   return (
-    <div className={styles.containerProduct}>
-      {productList.map((product, index) => (
-        <div key={index}>
-          <div>
-            <Image
-              src={ImageBackground}
-              alt="Imagem do produto"
-              width={214}
-              height={214}
-            />
+    <div className={styles.container}>
+      <div className={styles.containerProduct}>
+        {productList.map((product, index) => (
+          <div key={index} className={styles.product}>
+            <div>
+              <div>
+                <Image
+                  src={ImageProduct}
+                  alt="Imagem do produto"
+                  height={206}
+                  style={{ width: '100%', maxWidth: '240px' }}
+                  unoptimized={false}
+                />
+              </div>
+              <h2 className={font_secondary.className}>{product.name}</h2>
+            </div>
+            <div>
+              <strong className={font_primary.className}>
+                R$: {product.price}
+              </strong>
+              <button>
+                <Link href={'/'}>
+                  <span className={font_button.className}>
+                    VEJA EM DETALHES
+                  </span>
+                </Link>
+              </button>
+            </div>
           </div>
-          <h2>{product.name}</h2>
-          <div>
-            <strong>Preço: {product.price}</strong>
-            <button>
-              <Link href={'/'}>
-                <span>VEJA EM DETALHES</span>
-              </Link>
-            </button>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   )
 }
