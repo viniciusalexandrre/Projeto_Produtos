@@ -1,42 +1,67 @@
+.container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  position: absolute;
+}
 .containerProduct {
   width: 100%;
   display: grid;
-  justify-items: center;
   grid-template-columns: 1fr 1fr 1fr;
   margin-top: 100px;
   max-width: 1318px;
+  margin-bottom: 100px;
+  gap: 32px;
+  padding: 32px;
 
-  & > div:nth-child(1) {
-    width: 100%;
+  @media (max-width: 1100px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 680px) {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+
+  .product {
+    // width: 100%;
     max-width: 418px;
     background-color: #ffffff;
     border: 2px solid #000000;
     box-shadow: 4px 6px 0px 0px #000000;
     border-radius: 10px;
     padding: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     & > div:nth-child(1) {
-      background: #d4d4d4;
-      border-radius: 5px;
-      display: grid;
-      justify-items: center;
-      border: 2px solid #000000;
-      padding: 12px;
-      width: 100%;
-      max-width: 365px;
+      display: flex;
+      flex-direction: column;
+
+      & > div:nth-child(1) {
+        background-color: #d4d4d4;
+        padding: 14px;
+        display: flex;
+        justify-content: center;
+        border-radius: 5px;
+        border: 2px solid #000000;
+      }
+      h2 {
+        font-size: 18px;
+        line-height: 27px;
+        color: #212325;
+        width: 100%;
+        // max-width: 365px;
+        margin-bottom: 30px;
+      }
     }
-    h2 {
-      font-size: 17px;
-      line-height: 27px;
-      color: #212325;
-    }
-    & > div:nth-child(3) {
+    & > div:nth-child(2) {
       border: solid #000000;
       border-width: 2px 0px 0px 0px;
       padding-top: 26px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
+      gap: 18px;
+      // max-width: 365px;
       & > strong {
         color: #000000;
         font-size: 26px;
@@ -46,115 +71,19 @@
         border-radius: 10px;
         border: 2px solid #000000;
         box-shadow: 4px 4px 0px 0px;
+        width: 100%;
 
         & > a {
           display: flex;
           justify-content: center;
-          width: 100%;
-          align-items: center;
           padding: 18px 0px;
-        }
-      }
-    }
-  }
-  & > div:nth-child(2) {
-    width: 100%;
-    max-width: 418px;
-    background-color: #ffffff;
-    border: 2px solid #000000;
-    box-shadow: 4px 6px 0px 0px #000000;
-    border-radius: 10px;
-    padding: 26px;
-
-    div:nth-child(1) {
-      background: #d4d4d4;
-      border-radius: 5px;
-      display: grid;
-      justify-items: center;
-      border: 2px solid #000000;
-      padding: 12px;
-      width: 100%;
-      max-width: 365px;
-    }
-    h2 {
-      font-size: 17px;
-      line-height: 27px;
-      color: #212325;
-    }
-    div:nth-child(3) {
-      border: solid #000000;
-      border-width: 2px 0px 0px 0px;
-      padding-top: 26px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      & > strong {
-        color: #000000;
-        font-size: 26px;
-      }
-      & > button {
-        background: rgba(221, 125, 223, 0.78);
-        border-radius: 10px;
-        border: 2px solid #000000;
-        box-shadow: 4px 4px 0px 0px;
-
-        & > a {
-          display: flex;
-          justify-content: center;
-          width: 100%;
           align-items: center;
-          padding: 18px 0px;
-        }
-      }
-    }
-  }
-  & > div:nth-child(3) {
-    width: 100%;
-    max-width: 418px;
-    background-color: #ffffff;
-    border: 2px solid #000000;
-    box-shadow: 4px 6px 0px 0px #000000;
-    border-radius: 10px;
-    padding: 26px;
-
-    & > div:nth-child(1) {
-      background: #d4d4d4;
-      border-radius: 5px;
-      display: grid;
-      justify-items: center;
-      border: 2px solid #000000;
-      padding: 12px;
-      width: 100%;
-      max-width: 365px;
-    }
-    h2 {
-      font-size: 17px;
-      line-height: 27px;
-      color: #212325;
-    }
-    & > div:nth-child(3) {
-      border: solid #000000;
-      border-width: 2px 0px 0px 0px;
-      padding-top: 26px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      & > strong {
-        color: #000000;
-        font-size: 26px;
-      }
-      & > button {
-        background: rgba(221, 125, 223, 0.78);
-        border-radius: 10px;
-        border: 2px solid #000000;
-        box-shadow: 4px 4px 0px 0px;
-
-        & > a {
-          display: flex;
-          justify-content: center;
           width: 100%;
-          align-items: center;
-          padding: 18px 0px;
+
+          span {
+            font-size: 18px;
+            color: #000000;
+          }
         }
       }
     }
