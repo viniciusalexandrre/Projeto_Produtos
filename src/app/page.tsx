@@ -55,7 +55,7 @@ const Page = ({ products }: PageProps) => {
         </div>
       </header>
       <main>
-        <Image
+        {/* <Image
           src={ImageBackground}
           alt="teste"
           sizes="100vw"
@@ -64,7 +64,7 @@ const Page = ({ products }: PageProps) => {
             objectFit: 'cover',
             position: 'relative',
           }}
-        />
+        /> */}
         <Modal
           isOpen={isModalOpen}
           onClose={() => {
