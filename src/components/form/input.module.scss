@@ -1,0 +1,39 @@
+.input {
+  label {
+    font-size: 28px;
+    color: #000000;
+
+    @media (max-width: 680px) {
+      font-size: 26px;
+    }
+    @media (max-width: 480px) {
+      font-size: 24px;
+    }
+  }
+  & > div {
+    display: flex;
+    input {
+      width: 100%;
+      border: 2px solid #000000;
+      border-radius: 20px;
+      box-shadow: 4px 4px 0px 0px #000000;
+      font-weight: 400;
+      padding: 20px;
+      margin-top: 12px;
+      font-size: 28px;
+      outline: 0;
+
+      @media (max-width: 800px) {
+        max-width: 100%;
+      }
+      @media (max-width: 680px) {
+        padding: 16px;
+        font-size: 24px;
+      }
+      @media (max-width: 480px) {
+        font-size: 20px;
+        padding: 14px;
+      }
+    }
+  }
+}
