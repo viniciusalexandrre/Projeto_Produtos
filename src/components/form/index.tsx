@@ -1,182 +1,16 @@
-// 'use client'
-
-// import { font_primary } from '@/app/page'
-// import styles from './form.module.scss'
-// import { useState } from 'react'
-// import Image from 'next/image'
-// import secondDetail from '../../../public/icon/Detalhe_2.svg'
-// import { addDoc, collection } from 'firebase/firestore'
-// import { db } from '../../../config/firebase-config'
-// import { Product } from '../product'
-// import { useFormStatus } from 'react-dom'
-
-// function Button() {
-//   const status = useFormStatus()
-//   return (
-//     <button type="submit" disabled={status.pending}>
-//       <span className={font_primary.className}>CADASTRAR</span>
-//     </button>
-//   )
-// }
-
-// export const Form = () => {
-//   const [formData, setFormData] = useState(new FormData())
-
-//   async function adicionarProduto(event: any) {
-//     event.preventDefault()
-//     setFormData(new FormData(event.target))
-
-//     const produto: Product = {
-//       name: formData.get('name') as string,
-//       equipamento: formData.get('equipamento') as string,
-//       price: parseFloat(formData.get('preco') as string),
-//       id: '',
-//       image: '',
-//     }
-
-//     try {
-//       const produtosRef = collection(db, 'electronicProducts')
-//       const newDoc = await addDoc(produtosRef, produto)
-//       console.log('Produto cadastrado com sucesso!', newDoc.id)
-//     } catch (error) {
-//       console.error('Erro ao cadastrar produto:', error)
-//     }
-//   }
-
-//   return (
-//     <form className={styles.Form} onSubmit={adicionarProduto}>
-//       <div>
-//         <div>
-//           <div>
-//             <label className={font_primary.className} htmlFor="titulo">
-//               Titulo
-//             </label>
-//             <div
-//               style={{
-//                 display: 'flex',
-//                 width: '100%',
-//                 maxWidth: '480px',
-//               }}
-//             >
-//               <input
-//                 type="text"
-//                 placeholder="Ex: Notebook Dell..."
-//                 className={font_primary.className}
-//                 id="titulo"
-//                 name="name"
-//                 onChange={(event) =>
-//                   setFormData((formData) => {
-//                     formData.set('name', event.target.value)
-//                     return formData
-//                   })
-//                 }
-//               />
-//             </div>
-//           </div>
-//           <div>
-//             <label className={font_primary.className}>Equipamento</label>
-//             <div
-//               style={{
-//                 display: 'flex',
-//                 width: '100%',
-//                 maxWidth: '480px',
-//               }}
-//             >
-//               <select
-//                 name="equipamento"
-//                 id="equipamento"
-//                 className={font_primary.className}
-//                 onChange={(event: any) =>
-//                   setFormData((formData) => {
-//                     formData.set('equipamento', event.target.value)
-//                     return formData
-//                   })
-//                 }
-//               >
-//                 <option value="Notebook">Notebook</option>
-//                 <option value="Desktop">Desktop</option>
-//                 <option value="Console">Console</option>
-//               </select>
-//             </div>
-//           </div>
-//           <div>
-//             <label className={font_primary.className}>Preço</label>
-//             <div
-//               style={{
-//                 display: 'flex',
-//                 width: '100%',
-//                 maxWidth: '480px',
-//               }}
-//             >
-//               <input
-//                 type="number"
-//                 placeholder="Ex: 1.000,00"
-//                 className={font_primary.className}
-//                 id="price"
-//                 onChange={(event: any) =>
-//                   setFormData((formData) => {
-//                     formData.set('preco', event.target.value)
-//                     return formData
-//                   })
-//                 }
-//               />
-//             </div>
-//           </div>
-//           <label htmlFor="arquivo">
-//             <span className={font_primary.className}>Enviar Imagem</span>
-//             <input
-//               type="file"
-//               id="file"
-//               accept="image/*"
-//               style={{
-//                 opacity: '0',
-//                 position: 'absolute',
-//                 top: '0',
-//                 left: '0',
-//               }}
-//             />
-//           </label>
-//         </div>
-//         <div id="imageProduct"></div>
-//       </div>
-//       <div>
-//         <Image
-//           src={secondDetail}
-//           alt="Segundo Detalhe"
-//           style={{
-//             width: '100%',
-//             maxWidth: '1186px',
-//             height: 'auto',
-//             marginTop: '28px',
-//           }}
-//         />
-//       </div>
-//       <div>
-//         <Button />
-//       </div>
-//     </form>
-//   )
-// }
-
 'use client'
 
 import { useState } from 'react'
 import { font_primary } from '@/app/page'
 import styles from './form.module.scss'
 import Image from 'next/image'
+import ImageProduct from '../../../public/images/desktop/desktop_project 1.png'
 import secondDetail from '../../../public/icon/Detalhe_2.svg'
 import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../../../config/firebase-config'
 import { Product } from '../product'
-import { useFormStatus } from 'react-dom'
-
-function Button({ status }: { status: boolean }) {
-  return (
-    <button type="submit" disabled={status}>
-      <span className={font_primary.className}>CADASTRAR</span>
-    </button>
-  )
-}
+import Input from './input'
+import Button from './button'
 
 export const Form = () => {
   const [formData, setFormData] = useState({
@@ -271,47 +105,17 @@ export const Form = () => {
     <form className={styles.Form} onSubmit={adicionarProduto}>
       <div>
         <div>
-          <div>
-            <label className={font_primary.className} htmlFor="name">
-              Titulo
-            </label>
-            <div
-              style={{
-                display: 'flex',
-                width: '100%',
-                maxWidth: '480px',
-              }}
-            >
-              {errors.name && (
-                <input
-                  type="text"
-                  placeholder="Ex: Notebook Dell..."
-                  className={font_primary.className}
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                />
-              )}
-            </div>
-            {errors.name && (
-              <p
-                className={font_primary.className}
-                style={{ color: 'red', fontSize: '16px' }}
-              >
-                {errors.name}
-              </p>
-            )}
-          </div>
+          <Input
+            label="Titulo"
+            name="name"
+            placeholder="Ex: Notebook Dell..."
+            id="name"
+            onChange={handleInputChange}
+            error={errors.name}
+          />
           <div>
             <label className={font_primary.className}>Equipamento</label>
-            <div
-              style={{
-                display: 'flex',
-                width: '100%',
-                maxWidth: '480px',
-              }}
-            >
+            <div>
               <select
                 name="equipamento"
                 id="equipamento"
@@ -327,34 +131,21 @@ export const Form = () => {
             </div>
             {errors.equipamento && (
               <p
-                // className={styles.error}
-                style={{ fontFamily: `${font_primary}` }}
+                className={font_primary.className}
+                style={{ color: 'red', fontSize: '18px' }}
               >
                 {errors.equipamento}
               </p>
             )}
           </div>
-          <div>
-            <label className={font_primary.className}>Preço</label>
-            <div
-              style={{
-                display: 'flex',
-                width: '100%',
-                maxWidth: '480px',
-              }}
-            >
-              <input
-                type="number"
-                placeholder="Ex: 1.000,00"
-                className={font_primary.className}
-                id="preco"
-                name="preco"
-                value={formData.preco}
-                onChange={handleInputChange}
-              />
-            </div>
-            {errors.preco && <p className={styles.error}>{errors.preco}</p>}
-          </div>
+          <Input
+            type="number"
+            name="preco"
+            placeholder="Ex: 1.000,00"
+            label="Preço"
+            onChange={handleInputChange}
+            error={errors.preco}
+          />
           <label htmlFor="file">
             <span className={font_primary.className}>Enviar Imagem</span>
             <input
@@ -370,9 +161,25 @@ export const Form = () => {
               }}
             />
           </label>
-          {errors.file && <p className={styles.error}>{errors.file}</p>}
+          {errors.file && (
+            <p
+              className={font_primary.className}
+              style={{ color: 'red', fontSize: '18px' }}
+            >
+              {errors.file}
+            </p>
+          )}
         </div>
-        <div id="imageProduct"></div>
+        <div id="imageProduct">
+          <Image
+            src={ImageProduct}
+            alt="Imagem do Produto"
+            style={{ width: '100%', objectFit: 'fill' }}
+            height={498}
+            objectFit="cover"
+            unoptimized
+          />
+        </div>
       </div>
       <div>
         <Image

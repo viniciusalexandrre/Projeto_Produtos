@@ -10,6 +10,8 @@ import ContainerProducts from '@/components/product'
 import { Modal } from '@/components/modal/modal'
 import { useState } from 'react'
 import IconAdd from '../../public/icon/add_icon.svg'
+import FirstLogo from '../../public/icon/ViniStore.svg'
+import SecondLogo from '../../public/icon/Vs.svg'
 
 export const font_primary = localFont({
   src: './fonts/mona-sans/TTF/Mona-Sans-BoldWide.ttf',
@@ -36,7 +38,18 @@ const Page = ({ products }: PageProps) => {
       <header>
         <div>
           <div>
-            <h1 className={font_primary.className}>Vini Store</h1>
+            <Image
+              src={FirstLogo}
+              alt="Logo"
+              unoptimized
+              style={{ width: '100%', maxWidth: '302px', height: '46px' }}
+            />
+            <Image
+              src={SecondLogo}
+              alt='"Logo'
+              unoptimized
+              style={{ width: '100%', maxWidth: '52px', height: '55px' }}
+            />
           </div>
           <button
             onClick={() => {
@@ -47,9 +60,13 @@ const Page = ({ products }: PageProps) => {
               <span className={font_primary.className}>ADICIONAR</span>
             </Link>
           </button>
-          <button>
+          <button
+            onClick={() => {
+              setIsModalOpen(true)
+            }}
+          >
             <Link href={'/'}>
-              <Image src={IconAdd} alt="Icon Adição" />
+              <Image src={IconAdd} alt="Icon Adição" height={24} width={24} />
             </Link>
           </button>
         </div>
