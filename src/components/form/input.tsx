@@ -19,15 +19,20 @@ export default function Input({ label, error, ...props }: InputProps) {
       </label>
       <div>
         <input id={props.name} className={font_primary.className} {...props} />
-        {error && (
-          <p
-            className={font_primary.className}
-            style={{ color: 'red', fontSize: '18px' }}
-          >
-            {error}
-          </p>
-        )}
       </div>
+      {error && (
+        <p
+          className={font_primary.className}
+          style={{
+            color: 'red',
+            fontSize: '18px',
+            marginBottom: '0px',
+            marginTop: '12px',
+          }}
+        >
+          {error}
+        </p>
+      )}
     </div>
   )
 }
