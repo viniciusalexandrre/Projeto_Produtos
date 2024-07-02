@@ -26,7 +26,7 @@
       display: flex;
       flex-direction: column;
       div + div {
-        margin-top: 26px;
+        margin-top: 18px;
       }
       & > div:nth-child(2) {
         display: flex;
@@ -50,9 +50,10 @@
             border: 2px solid #000000;
             box-shadow: 4px 4px 0px 0px #000000;
             border-radius: 20px;
-            margin-top: 12px;
+            margin-top: 8px;
             width: 100%;
             outline: 0;
+            transition: transform 0.3s ease-in-out;
 
             @media (max-width: 800px) {
               max-width: 100%;
@@ -65,6 +66,14 @@
               padding: 14px;
             }
           }
+          & > select:hover {
+            transform: translate(-0.3rem, -0.3rem);
+          }
+          & > select:active {
+            transform: translate(0, 0);
+            box-shadow: 0px 0px 0px 0px #000;
+            animation-duration: 2.8s;
+          }
         }
       }
       & > label {
@@ -75,14 +84,16 @@
         justify-content: center;
         width: 100%;
         max-width: 300px;
-        margin-top: 20px;
+        margin-top: 18px;
         align-items: center;
         cursor: pointer;
         padding: 14px 0px;
+        transition: transform 0.3s ease-in-out;
 
         & > span {
           font-size: 28px;
           color: #000000;
+          transition: transform 0.2s;
 
           @media (max-width: 680px) {
             font-size: 24px;
@@ -91,6 +102,14 @@
             font-size: 20px;
           }
         }
+      }
+      & > label:hover {
+        transform: translate(-0.3rem, -0.3rem);
+      }
+      & > label:active {
+        transform: translate(0, 0);
+        box-shadow: 0px 0px 0px 0px #000;
+        animation-duration: 2.8s;
       }
     }
     & > div:nth-child(2) {
@@ -107,9 +126,8 @@
       }
       & > img {
         height: 100%;
-        max-height: 498px;
         border-radius: 10px;
-        object-fit: cover;
+        object-fit: fill;
         width: 100%;
         max-width: 468px;
       }
@@ -126,7 +144,7 @@
   }
   & > div:nth-child(3) {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     margin: 20px 20px 20px 20px;
     & > button {
       border-radius: 20px;
@@ -136,6 +154,7 @@
       max-width: 346px;
       box-shadow: 8px 8px 0px 0px #000000;
       background: #dd7ddf;
+      transition: transform 0.3s ease-in-out;
 
       @media (max-width: 480px) {
         padding: 14px 6px;
@@ -143,11 +162,25 @@
       & > span {
         color: #000000;
         font-size: 28px;
+        display: block;
+        transition: transform 0.2s;
 
         @media (max-width: 480px) {
           font-size: 22px;
         }
       }
+    }
+    & > button:hover {
+      transform: translate(-0.4rem, -0.4rem);
+    }
+    & > button:active {
+      transform: translate(0, 0);
+      box-shadow: 0px 0px 0px 0px #000000;
+      animation-duration: 2.8s;
+    }
+    & > button:hover span {
+      transform: translate(-0.2rem, -0.2rem);
+      animation-duration: 0.8s;
     }
   }
 }
