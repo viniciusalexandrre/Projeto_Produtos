@@ -54,7 +54,7 @@
           }
         }
         & > button:nth-child(1):hover {
-          transform: translate(-0.4rem, -0.4rem);
+          transform: translate(-0.4rem, -0rem);
         }
         & > button:nth-child(1):active {
           transform: translate(0, 0);
@@ -94,6 +94,12 @@
         @media (max-width: 1200px) {
           padding-left: 18px;
         }
+        @media (max-height: 700px) {
+          display: none;
+        }
+      }
+      @media (max-height: 700px) {
+        padding: 10px 0px;
       }
     }
   }

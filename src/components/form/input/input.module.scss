@@ -1,0 +1,173 @@
+.containerInput {
+  label {
+    font-size: 28px;
+    color: #000000;
+
+    @media (max-width: 680px) {
+      font-size: 26px;
+    }
+    @media (max-width: 480px) {
+      font-size: 24px;
+    }
+  }
+  & > div {
+    display: flex;
+    input {
+      width: 100%;
+      border: 2px solid #000000;
+      border-radius: 20px;
+      box-shadow: 4px 4px 0px 0px #000000;
+      font-weight: 400;
+      padding: 20px;
+      margin-top: 8px;
+      font-size: 16px;
+      outline: 0;
+      transition: transform 0.3s ease-in-out;
+
+      @media (max-width: 800px) {
+        max-width: 100%;
+      }
+      @media (max-width: 680px) {
+        padding: 16px;
+        font-size: 24px;
+      }
+      @media (max-width: 480px) {
+        font-size: 20px;
+        padding: 14px;
+      }
+    }
+    input:hover {
+      transform: translate(-0.3rem, -0.3rem);
+    }
+    input:active {
+      transform: translate(0, 0);
+      box-shadow: 0px 0px 0px 0px #000000;
+      animation-duration: 2.8s;
+    }
+  }
+}
+
+.containerInputError {
+  label {
+    font-size: 28px;
+    color: #000000;
+
+    @media (max-width: 680px) {
+      font-size: 26px;
+    }
+    @media (max-width: 480px) {
+      font-size: 24px;
+    }
+  }
+  & > div {
+    display: flex;
+    input {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 4px 4px 0px 0px #d9314c;
+      font-weight: 400;
+      padding: 20px;
+      margin-top: 8px;
+      font-size: 18px;
+      outline: 0;
+      transition: transform 0.3s ease-in-out;
+      border: 2px solid #d9314c;
+
+      @media (max-width: 800px) {
+        max-width: 100%;
+      }
+      @media (max-width: 680px) {
+        padding: 16px;
+        font-size: 24px;
+      }
+      @media (max-width: 480px) {
+        font-size: 20px;
+        padding: 14px;
+      }
+    }
+    input:hover {
+      transform: translate(-0.3rem, -0.3rem);
+    }
+    input:active {
+      transform: translate(0, 0);
+      box-shadow: 0px 0px 0px 0px #000000;
+      animation-duration: 2.8s;
+    }
+  }
+}
+
+.containerInputFile {
+  label {
+    border-radius: 20px;
+    border: 2px solid #000000;
+    box-shadow: 4px 4px 0px 0px #000000;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 18px;
+    align-items: center;
+    cursor: pointer;
+    padding: 14px 0px;
+    transition: transform 0.3s ease-in-out;
+
+    & > span {
+      font-size: 28px;
+      color: #000000;
+      transition: transform 0.2s;
+
+      @media (max-width: 680px) {
+        font-size: 24px;
+      }
+      @media (max-width: 480px) {
+        font-size: 20px;
+      }
+    }
+  }
+  label:hover {
+    transform: translate(-0.3rem, -0.3rem);
+  }
+  label:active {
+    transform: translate(0, 0);
+    box-shadow: 0px 0px 0px 0px #000;
+    animation-duration: 2.8s;
+  }
+}
+
+.containerInputFileError {
+  label {
+    border-radius: 20px;
+    border: 2px solid #d9314c;
+    box-shadow: 4px 4px 0px 0px #d9314c;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 18px;
+    align-items: center;
+    cursor: pointer;
+    padding: 14px 0px;
+    transition: transform 0.3s ease-in-out;
+
+    & > span {
+      font-size: 28px;
+      color: #000000;
+      transition: transform 0.2s;
+
+      @media (max-width: 680px) {
+        font-size: 24px;
+      }
+      @media (max-width: 480px) {
+        font-size: 20px;
+      }
+    }
+  }
+  label:hover {
+    transform: translate(-0.3rem, -0.3rem);
+  }
+  label:active {
+    transform: translate(0, 0);
+    box-shadow: 0px 0px 0px 0px #000;
+    animation-duration: 2.8s;
+  }
+}

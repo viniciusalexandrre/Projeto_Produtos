@@ -1,0 +1,103 @@
+.containerSelect {
+  display: flex;
+  flex-direction: column;
+
+  & > label {
+    font-size: 28px;
+    color: #000000;
+    @media (max-width: 680px) {
+      font-size: 26px;
+    }
+    @media (max-width: 480px) {
+      font-size: 24px;
+    }
+  }
+  & > div {
+    & > select {
+      color: #757575;
+      font-size: 18px;
+      padding: 20px;
+      border: 2px solid #000000;
+      box-shadow: 4px 4px 0px 0px #000000;
+      border-radius: 20px;
+      margin-top: 8px;
+      width: 100%;
+      outline: 0;
+      transition: transform 0.3s ease-in-out;
+      appearance: none;
+      background: url('../../../../public/icon/detalhe-select.svg') no-repeat
+        center right #fff;
+
+      @media (max-width: 800px) {
+        max-width: 100%;
+      }
+      @media (max-width: 680px) {
+        font-size: 24px;
+      }
+      @media (max-width: 480px) {
+        font-size: 20px;
+        padding: 14px;
+      }
+    }
+    & > select:hover {
+      transform: translate(-0.3rem, -0.3rem);
+    }
+    & > select:active {
+      transform: translate(0, 0);
+      box-shadow: 0px 0px 0px 0px #000;
+      animation-duration: 2.8s;
+    }
+  }
+}
+
+.containerSelectError {
+  display: flex;
+  flex-direction: column;
+
+  & > label {
+    font-size: 28px;
+    color: #000000;
+    @media (max-width: 680px) {
+      font-size: 26px;
+    }
+    @media (max-width: 480px) {
+      font-size: 24px;
+    }
+  }
+  & > div {
+    & > select {
+      color: #757575;
+      font-size: 18px;
+      padding: 20px;
+      border: 2px solid #d9314c;
+      box-shadow: 4px 4px 0px 0px #d9314c;
+      border-radius: 20px;
+      margin-top: 8px;
+      width: 100%;
+      outline: 0;
+      transition: transform 0.3s ease-in-out;
+      background: url('../../../../public/icon/detalhe-select.svg') no-repeat
+        center right #fff;
+      appearance: none;
+
+      @media (max-width: 800px) {
+        max-width: 100%;
+      }
+      @media (max-width: 680px) {
+        font-size: 24px;
+      }
+      @media (max-width: 480px) {
+        font-size: 20px;
+        padding: 14px;
+      }
+    }
+    & > select:hover {
+      transform: translate(-0.3rem, -0.3rem);
+    }
+    & > select:active {
+      transform: translate(0, 0);
+      box-shadow: 0px 0px 0px 0px #000;
+      animation-duration: 2.8s;
+    }
+  }
+}
