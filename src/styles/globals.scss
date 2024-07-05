@@ -19,10 +19,6 @@
 
   //color
   --color0: #000;
-
-  //font-family
-  --font_semiBold: scr('../app/fonts/mona-sans/TTF/Mona-Sans-SemiBoldWide.ttf');
-  font-family: var(--font_regular);
 }
 
 body {
@@ -31,13 +27,8 @@ body {
   overflow-x: none;
 }
 
-strong {
-  font-family: var(--font_regular);
-}
-
 button {
   cursor: pointer;
-  font-family: var(--font_regular);
 }
 
 a {
