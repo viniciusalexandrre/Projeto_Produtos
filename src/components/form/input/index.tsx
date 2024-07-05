@@ -35,25 +35,25 @@ export function Input({ label, error, ...props }: InputProps) {
 
 export function InputFile({ error, ...props }: InputFieProps) {
   return (
-    <div
+    <label
+      htmlFor="file"
       className={
         error ? styles.containerInputFileError : styles.containerInputFile
       }
     >
-      <label htmlFor="file">
-        <span>Enviar Imagem</span>
-        <input
-          type="file"
-          id={props.name}
-          style={{
-            opacity: '0',
-            position: 'absolute',
-            top: '0',
-            left: '0',
-          }}
-          {...props}
-        />
-      </label>
+      <span>Enviar Imagem</span>
+      <input
+        type="file"
+        id={props.name}
+        style={{
+          opacity: '0',
+          position: 'absolute',
+          top: '0',
+          left: '0',
+        }}
+        {...props}
+      />
+
       {error && (
         <p
           style={{
@@ -66,6 +66,6 @@ export function InputFile({ error, ...props }: InputFieProps) {
           {error}
         </p>
       )}
-    </div>
+    </label>
   )
 }

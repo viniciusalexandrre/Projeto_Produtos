@@ -6,10 +6,29 @@ export const metadata: Metadata = {
   description: 'Loja de equipamentos eletronicos',
 }
 
-export const font_primary = localFont({
-  src: './fonts/mona-sans/TTF/Mona-Sans-BoldWide.ttf',
-  display: 'swap',
-  variable: '--font_bold',
+export const monaSans = localFont({
+  src: [
+    {
+      path: './fonts/Mona-Sans-RegularWide.ttf',
+      weight: '400',
+      style: 'wide',
+    },
+    {
+      path: './fonts/Mona-Sans-MediumWide.ttf',
+      weight: '500',
+      style: 'wide',
+    },
+    {
+      path: './fonts/Mona-Sans-SemiBoldWide.ttf',
+      weight: '600',
+      style: 'wide',
+    },
+    {
+      path: './fonts/Mona-Sans-BoldWide.ttf',
+      weight: '700',
+      style: 'wide',
+    },
+  ],
 })
 
 export default function RootLayout({
@@ -19,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className={font_primary.className}>{children}</body>
+      <body className={monaSans.className}>{children}</body>
     </html>
   )
 }

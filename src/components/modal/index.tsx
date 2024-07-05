@@ -29,41 +29,39 @@ export const Modal = ({ isOpen, onClose, onProductAdded }: ModalProps) => {
 
   return (
     <>
-      <section className={styles.modalBackdrop}>
+      <div className={styles.modalBackdrop}>
         <div>
           <div>
-            <div>
-              <button onClick={onClose}>
-                <Image
-                  src={closeButton}
-                  alt="close button"
-                  width={24}
-                  height={24}
-                />
-              </button>
-            </div>
-            <h1>ADICIONAR PRODUTOS</h1>
-            <div>
+            <button onClick={onClose}>
               <Image
-                src={firstDetail}
-                alt="Primeiro Detalhe"
-                style={{
-                  width: '100%',
-                  maxWidth: '1186px',
-                  height: 'auto',
-                  marginBottom: '24px',
-                }}
+                src={closeButton}
+                alt="close button"
+                width={24}
+                height={24}
               />
-            </div>
-            <Form
-              registrationSuccess={(newProduct) => {
-                onProductAdded(newProduct)
-                onClose()
+            </button>
+          </div>
+          <h1>ADICIONAR PRODUTOS</h1>
+          <div>
+            <Image
+              src={firstDetail}
+              alt="Primeiro Detalhe"
+              style={{
+                width: '100%',
+                maxWidth: '1186px',
+                height: 'auto',
+                marginBottom: '24px',
               }}
             />
           </div>
+          <Form
+            registrationSuccess={(newProduct) => {
+              onProductAdded(newProduct)
+              onClose()
+            }}
+          />
         </div>
-      </section>
+      </div>
     </>
   )
 }

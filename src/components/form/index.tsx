@@ -81,45 +81,49 @@ export const Form = ({ registrationSuccess }: FormProps) => {
     <form className={styles.Form} onSubmit={adicionarProduto}>
       <div>
         <div>
-          <Input
-            label="Titulo"
-            name="name"
-            placeholder="Ex: Notebook Dell..."
-            id="name"
-            onChange={handleInputChange}
-            error={errors.name}
-          />
-          <Select
-            label="Equipamento"
-            name="equipamento"
-            value={formData.equipamento}
-            onChange={handleInputChange}
-            error={errors.equipamento}
-          />
-          <Input
-            type="number"
-            name="preco"
-            placeholder="Ex: 1.000,00"
-            label="Preço"
-            onChange={handleInputChange}
-            error={errors.preco}
-          />
-          <InputFile
-            type="file"
-            id="file"
-            onChange={handleFileChange}
-            error={errors.file}
-          />
-        </div>
-        <div id="imageProduct">
-          <Image
-            src={ImageProduct}
-            alt="Imagem do Produto"
-            style={{ width: '100%', objectFit: 'fill' }}
-            height={498}
-            objectFit="cover"
-            unoptimized
-          />
+          <div>
+            <Input
+              label="Titulo"
+              name="name"
+              placeholder="Ex: Notebook Dell..."
+              id="name"
+              onChange={handleInputChange}
+              error={errors.name}
+            />
+            <Select
+              label="Equipamento"
+              name="equipamento"
+              value={formData.equipamento}
+              onChange={handleInputChange}
+              error={errors.equipamento}
+            />
+            <Input
+              type="number"
+              name="preco"
+              placeholder="Ex: 1.000,00"
+              label="Preço"
+              onChange={handleInputChange}
+              error={errors.preco}
+            />
+          </div>
+          <div id="imageProduct">
+            <div>
+              <Image
+                src={ImageProduct}
+                alt="Imagem do Produto"
+                style={{ width: '100%', objectFit: 'fill' }}
+                height={235}
+                objectFit="cover"
+                unoptimized
+              />
+            </div>
+            <InputFile
+              type="file"
+              id="file"
+              onChange={handleFileChange}
+              error={errors.file}
+            />
+          </div>
         </div>
       </div>
       <div>
