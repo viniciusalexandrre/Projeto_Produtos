@@ -21,7 +21,7 @@ export function Input({ label, error, ...props }: InputProps) {
         <p
           style={{
             color: '#d9314c',
-            fontSize: '18px',
+            fontSize: '16px',
             marginBottom: '0px',
             marginTop: '12px',
           }}
@@ -35,30 +35,30 @@ export function Input({ label, error, ...props }: InputProps) {
 
 export function InputFile({ error, ...props }: InputFieProps) {
   return (
-    <label
-      htmlFor="file"
+    <div
       className={
         error ? styles.containerInputFileError : styles.containerInputFile
       }
     >
-      <span>Enviar Imagem</span>
-      <input
-        type="file"
-        id={props.name}
-        style={{
-          opacity: '0',
-          position: 'absolute',
-          top: '0',
-          left: '0',
-        }}
-        {...props}
-      />
-
+      <label htmlFor="file">
+        <span>Enviar Imagem</span>
+        <input
+          type="file"
+          id={props.name}
+          style={{
+            opacity: '0',
+            position: 'absolute',
+            top: '0',
+            left: '0',
+          }}
+          {...props}
+        />
+      </label>
       {error && (
         <p
           style={{
             color: '#d9314c',
-            fontSize: '18px',
+            fontSize: '16px',
             marginBottom: '0px',
             marginTop: '12px',
           }}
@@ -66,6 +66,6 @@ export function InputFile({ error, ...props }: InputFieProps) {
           {error}
         </p>
       )}
-    </label>
+    </div>
   )
 }

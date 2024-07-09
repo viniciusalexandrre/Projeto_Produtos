@@ -3,8 +3,8 @@
 import { useEffect } from 'react'
 import styles from './modal.module.scss'
 import Image from 'next/image'
-import closeButton from '../../../public/icon/close.svg'
-import firstDetail from '../../../public/icon/Detalhe_1.svg'
+import closeButton from '../../../public/icon/Modal/button/close.svg'
+import firstDetail from '../../../public/icon/Modal/detalhes/Detalhe_1.svg'
 import { Form } from '../form'
 import { Product } from '../product'
 

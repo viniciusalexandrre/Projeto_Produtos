@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import IconAdd from '../../../../public/icon/add_icon.svg'
+import IconAdd from '../../../../public/icon/Header/button/add_icon.svg'
 import styles from './button.module.scss'
 
 export function Button({ ...props }) {

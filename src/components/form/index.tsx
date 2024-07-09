@@ -4,7 +4,7 @@ import { useState } from 'react'
 import styles from './form.module.scss'
 import Image from 'next/image'
 import ImageProduct from '../../../public/images/desktop/desktop_project 1.png'
-import secondDetail from '../../../public/icon/Detalhe_2.svg'
+import secondDetail from '../../../public/icon/Modal/detalhes/Detalhe_2.svg'
 import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../../../config/firebase-config'
 import { Product } from '../product'
@@ -111,9 +111,7 @@ export const Form = ({ registrationSuccess }: FormProps) => {
               <Image
                 src={ImageProduct}
                 alt="Imagem do Produto"
-                style={{ width: '100%', objectFit: 'fill' }}
-                height={235}
-                objectFit="cover"
+                style={{ width: '100%', objectFit: 'cover', height: 'auto' }}
                 unoptimized
               />
             </div>
@@ -137,9 +135,7 @@ export const Form = ({ registrationSuccess }: FormProps) => {
           }}
         />
       </div>
-      <div>
-        <Button status={false} />
-      </div>
+      <Button status={false} />
     </form>
   )
 }

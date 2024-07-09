@@ -1,7 +1,11 @@
+import styles from './button.module.scss'
+
 export default function Button({ status }: { status: boolean }) {
   return (
-    <button type="submit" disabled={status}>
-      <span>CADASTRAR</span>
-    </button>
+    <div className={styles.button}>
+      <button type="submit" disabled={status}>
+        <span>CADASTRAR</span>
+      </button>
+    </div>
   )
 }

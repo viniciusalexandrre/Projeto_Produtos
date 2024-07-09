@@ -46,33 +46,32 @@ const ContainerProducts = ({ newProduct }: ContainerProductsProps) => {
   }, [newProduct])
 
   return (
-    <div className={styles.container}>
-      <div className={styles.containerProduct}>
-        {productList.map((product, index) => (
-          <div key={index} className={styles.product}>
+    <div className={styles.containerProduct}>
+      {productList.map((product, index) => (
+        <div key={index} className={styles.product}>
+          <div>
             <div>
-              <div>
-                <Image
-                  src={ImageProduct}
-                  alt="Imagem do produto"
-                  height={206}
-                  style={{ width: '100%', maxWidth: '240px' }}
-                  unoptimized={false}
-                />
-              </div>
-              <h2>{product.name}</h2>
+              <Image
+                src={ImageProduct}
+                alt="Imagem do produto"
+                height={206}
+                width={240}
+                unoptimized
+                priority={false}
+              />
             </div>
-            <div>
-              <strong>R$: {product.price}</strong>
-              <button>
-                <Link href={'/'}>
-                  <span>🚧 Em breve</span>
-                </Link>
-              </button>
-            </div>
+            <h2>{product.name}</h2>
           </div>
-        ))}
-      </div>
+          <div>
+            <strong>R$: {product.price}</strong>
+            <button>
+              <Link href={'/'}>
+                <span>🚧 Em breve</span>
+              </Link>
+            </button>
+          </div>
+        </div>
+      ))}
     </div>
   )
 }
