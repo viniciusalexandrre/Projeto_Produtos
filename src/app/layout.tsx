@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'Loja de equipamentos eletronicos',
 }
 
-export const monaSans = localFont({
+const monaSans = localFont({
   src: [
     {
       path: './fonts/Mona-Sans-RegularWide.ttf',
