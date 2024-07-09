@@ -2,6 +2,7 @@
   label {
     font-size: 28px;
     color: #000000;
+    font-weight: 700;
 
     @media (max-width: 680px) {
       font-size: 26px;
@@ -21,6 +22,8 @@
       padding: 20px;
       margin-top: 8px;
       font-size: 16px;
+      font-family: '__monaSans_fe06ff';
+      font-weight: 700;
       outline: 0;
       transition: transform 0.3s ease-in-out;
 
@@ -51,6 +54,7 @@
   label {
     font-size: 28px;
     color: #000000;
+    font-weight: 700;
 
     @media (max-width: 680px) {
       font-size: 26px;
@@ -69,6 +73,8 @@
       padding: 20px;
       margin-top: 8px;
       font-size: 18px;
+      font-family: '__monaSans_fe06ff';
+      font-weight: 700;
       outline: 0;
       transition: transform 0.3s ease-in-out;
       border: 2px solid #d9314c;
@@ -97,66 +103,68 @@
 }
 
 .containerInputFile {
-  border-radius: 20px;
-  border: 2px solid #000000;
-  box-shadow: 4px 4px 0px 0px #000000;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  max-width: 300px;
-  margin-top: 18px;
-  align-items: center;
-  cursor: pointer;
-  padding: 12px 0px;
-  transition: transform 0.3s ease-in-out;
+  display: contents;
+  & > label {
+    border-radius: 20px;
+    border: 2px solid #000000;
+    box-shadow: 4px 4px 0px 0px #000000;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 300px;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px 0px;
+    transition: transform 0.3s ease-in-out;
+    margin-top: 20px;
 
-  & > span {
-    font-size: 18px;
-    color: #000000;
-    transition: transform 0.2s;
+    & > span {
+      font-size: 18px;
+      color: #000000;
+      transition: transform 0.2s;
+      font-family: '__monaSans_fe06ff';
+      font-weight: 700;
+    }
   }
-}
-.containerInputFile:hover {
-  transform: translate(-0.3rem, -0.3rem);
-}
-.containerInputFile:active {
-  transform: translate(0, 0);
-  box-shadow: 0px 0px 0px 0px #000;
-  animation-duration: 2.8s;
+  & > label:hover {
+    transform: translate(-0.3rem, -0.3rem);
+  }
+  & > label:active {
+    transform: translate(0, 0);
+    box-shadow: 0px 0px 0px 0px #000;
+    animation-duration: 2.8s;
+  }
 }
 
 .containerInputFileError {
-  border-radius: 20px;
-  border: 2px solid #d9314c;
-  box-shadow: 4px 4px 0px 0px #d9314c;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  max-width: 300px;
-  margin-top: 26px;
-  align-items: center;
-  cursor: pointer;
-  padding: 14px 0px;
-  transition: transform 0.3s ease-in-out;
+  & > label {
+    border-radius: 20px;
+    border: 2px solid #d9314c;
+    box-shadow: 4px 4px 0px 0px #d9314c;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 300px;
+    align-items: center;
+    cursor: pointer;
+    padding: 14px 0px;
+    transition: transform 0.3s ease-in-out;
+    margin-top: 20px;
 
-  & > span {
-    font-size: 8px;
-    color: #000000;
-    transition: transform 0.2s;
-
-    @media (max-width: 680px) {
-      font-size: 24px;
-    }
-    @media (max-width: 480px) {
-      font-size: 20px;
+    & > span {
+      font-size: 18px;
+      color: #000000;
+      transition: transform 0.2s;
+      font-family: '__monaSans_fe06ff';
+      font-weight: 700;
     }
   }
-}
-.containerInputFileError:hover {
-  transform: translate(-0.3rem, -0.3rem);
-}
-.containerInputFileError:active {
-  transform: translate(0, 0);
-  box-shadow: 0px 0px 0px 0px #000;
-  animation-duration: 2.8s;
+  & > label:hover {
+    transform: translate(-0.3rem, -0.3rem);
+  }
+  & > label:active {
+    transform: translate(0, 0);
+    box-shadow: 0px 0px 0px 0px #000;
+    animation-duration: 2.8s;
+  }
 }

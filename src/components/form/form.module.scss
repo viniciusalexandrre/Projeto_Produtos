@@ -19,12 +19,15 @@
       & > div:nth-child(1) {
         width: 100%;
         max-width: 480px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
 
         @media (max-width: 800px) {
           max-width: none;
         }
         div + div {
-          margin-top: 26px;
+          margin-top: 18px;
         }
         & > label {
           border-radius: 20px;
@@ -39,6 +42,8 @@
           cursor: pointer;
           padding: 14px 0px;
           transition: transform 0.3s ease-in-out;
+          // font-weight: 700;
+          font-style: bold;
 
           & > span {
             font-size: 28px;
@@ -72,6 +77,7 @@
         width: 100%;
         max-width: 414px;
         padding: 20px;
+        justify-content: space-between;
 
         @media (max-width: 800px) {
           width: auto;
@@ -83,6 +89,8 @@
           border: 2px solid #000;
           display: flex;
           max-width: 414px;
+          height: 100%;
+          max-height: 280px;
 
           @media (max-width: 800px) {
             max-width: none;
@@ -92,6 +100,7 @@
             object-fit: fill;
             width: 100%;
             max-width: 414px;
+            height: auto;
 
             @media (max-width: 800px) {
               max-width: none;
@@ -108,48 +117,6 @@
 
     @media (max-width: 1200px) {
       padding-right: 18px;
-    }
-  }
-  & > div:nth-child(3) {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 20px 20px 20px;
-    & > button {
-      border-radius: 20px;
-      border: 2px solid #000000;
-      padding: 20px 6px;
-      width: 100%;
-      max-width: 346px;
-      box-shadow: 8px 8px 0px 0px #000000;
-      background: #dd7ddf;
-      transition: transform 0.3s ease-in-out;
-
-      @media (max-width: 480px) {
-        padding: 14px 6px;
-        max-width: 260px;
-      }
-      & > span {
-        color: #000000;
-        font-size: 28px;
-        display: block;
-        transition: transform 0.2s;
-
-        @media (max-width: 480px) {
-          font-size: 22px;
-        }
-      }
-    }
-    & > button:hover {
-      transform: translate(-0.4rem, -0.4rem);
-    }
-    & > button:active {
-      transform: translate(0, 0);
-      box-shadow: 0px 0px 0px 0px #000000;
-      animation-duration: 2.8s;
-    }
-    & > button:hover span {
-      transform: translate(-0.2rem, -0.2rem);
-      animation-duration: 0.8s;
     }
   }
 }
