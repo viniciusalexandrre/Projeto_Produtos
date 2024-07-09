@@ -1,0 +1,19 @@
+.containerSelect {
+  color: #000;
+  font-size: 12px;
+  padding: 16px;
+  border: 1px solid #000;
+  box-shadow: 2px 2px 0px 0px #000;
+  border-radius: 10px;
+  outline: 0;
+  transition: transform 0.3s ease-in-out;
+  appearance: none;
+  font-weight: 700;
+  font-family: '__monaSans_fe06ff';
+  background: url('../../../../../public/icon/Modal/select/detalhe-select.svg')
+    no-repeat center right #fff;
+  width: 100%;
+  max-width: 185px;
+  text-transform: uppercase;
+  height: 44px;
+}

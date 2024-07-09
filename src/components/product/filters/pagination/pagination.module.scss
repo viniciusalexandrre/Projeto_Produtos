@@ -1,0 +1,25 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 80px;
+  grid-area: pagination;
+
+  li + li {
+    padding-left: 20px;
+  }
+  & > li {
+    & > button {
+      display: flex;
+      padding: 14px;
+      border-radius: 15px;
+      border: 2px solid #000;
+
+      & > strong {
+        font-size: 18px;
+        font-family: '__monaSans_fe06ff';
+        font-weight: 700;
+      }
+    }
+  }
+}
