@@ -100,8 +100,8 @@ main {
     max-width: 1323px;
     margin: 0 auto;
     gap: 28px;
-    // grid-template-columns: 48px 1fr;
-    grid-template-columns: 415px 1fr;
+    grid-template-columns: 44px 1fr;
+    // grid-template-columns: 415px 1fr;
     grid-template-areas:
       'menu containerFilters'
       'containerProduct containerProduct'
