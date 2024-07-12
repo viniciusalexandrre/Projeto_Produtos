@@ -48,7 +48,7 @@ export const Modal = ({ isOpen, onClose, onProductAdded }: ModalProps) => {
               alt="Primeiro Detalhe"
               style={{
                 width: '100%',
-                maxWidth: '1186px',
+                maxWidth: '1186x',
                 height: 'auto',
                 marginBottom: '24px',
               }}
