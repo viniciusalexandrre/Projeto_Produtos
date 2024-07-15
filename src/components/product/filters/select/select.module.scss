@@ -13,7 +13,24 @@
   background: url('../../../../../public/icon/Modal/select/detalhe-select.svg')
     no-repeat center right #fff;
   width: 100%;
-  max-width: 185px;
+  max-width: 210px;
   text-transform: uppercase;
   height: 44px;
+  margin-left: 12px;
+
+  &:hover {
+    transform: translate(-0.3rem, -0.3rem);
+  }
+  &:active {
+    transform: translate(0, 0);
+    box-shadow: 0px 0px 0px 0px #000000;
+    animation-duration: 2.8s;
+  }
+  & > option {
+    background-color: #fff;
+  }
+
+  @media (max-width: 680px) {
+    max-width: 130px;
+  }
 }

@@ -9,6 +9,7 @@
     width: 100%;
     max-width: 44px;
     transition: transform 0.2s;
+    height: 44px;
 
     & > a {
       display: grid;
@@ -65,8 +66,6 @@
         & > div:nth-child(2) {
           margin-top: 12px;
 
-          & > input {
-          }
           & > label {
             font-size: 10px;
             font-family: '__monaSans_fe06ff';
