@@ -20,11 +20,13 @@
 
   &:hover {
     transform: translate(-0.3rem, -0.3rem);
+    background-color: #dd7ddf;
   }
   &:active {
     transform: translate(0, 0);
     box-shadow: 0px 0px 0px 0px #000000;
     animation-duration: 2.8s;
+    background-color: #dd7ddf;
   }
   & > option {
     background-color: #fff;
