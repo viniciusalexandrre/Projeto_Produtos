@@ -1,7 +1,17 @@
 // 'use client'
 
 // import { useEffect, useState } from 'react'
-// import { collection, doc, getDocs } from 'firebase/firestore'
+// import {
+//   collection,
+//   getDocs,
+//   query as firestoreQuery,
+//   where,
+//   orderBy,
+//   limit,
+//   startAfter,
+//   QueryDocumentSnapshot,
+//   DocumentData,
+// } from 'firebase/firestore'
 // import { db } from '../../../config/firebase-config'
 // import styles from '@/components/product/product.module.scss'
 // import Image from 'next/image'
@@ -17,49 +27,81 @@
 // }
 
 // interface ContainerProductsProps {
+//   query: string
+//   currentPage: number
+//   category?: string
 //   newProduct?: Product
+//   setProductList: (product: Product[]) => void
+//   productList: Product[]
 // }
-
-// const ContainerProducts = ({ newProduct }: ContainerProductsProps) => {
+// const ContainerProducts = ({
+//   query,
+//   currentPage,
+//   category,
+//   newProduct,
+//   // setProductList,
+//   // productList
+// }: ContainerProductsProps) => {
 //   const [productList, setProductList] = useState<Product[]>([])
+//   const [lastVisible, setLastVisible] =
+//     useState<QueryDocumentSnapshot<DocumentData> | null>(null)
 
-//   const getProducts = async () => {
-//     const querySnapshot = await getDocs(collection(db, 'electronicProducts'))
-//     const productList = querySnapshot.docs.map((doc) => ({
+//   const fetchProducts = async (
+//     currentPage: number,
+//     query: string,
+//     category?: string,
+//   ): Promise<Product[]> => {
+//     const pageSize = 5
+//     let querySnapshot = collection(db, 'electronicProducts')
+
+//     let q = firestoreQuery(collectionRef, orderBy('name'), limit(pageSize))
+//     if (category) {
+//       q = firestoreQuery(q, where('category', '==', category))
+//     }
+
+//     if (query) {
+//       q = firestoreQuery(
+//         q,
+//         where('name', '>=', query),
+//         where('name', '<=', query + '\uf8ff'),
+//       )
+//     }
+
+//     if (lastVisible && currentPage > 1) {
+//       q = firestoreQuery(q, startAfter(lastVisible))
+//     }
+
+//     const querySnapshot = await getDocs(q)
+
+//     const products = querySnapshot.docs.map((doc) => ({
 //       id: doc.id,
 //       equipamento: doc.data().equipamento,
 //       price: doc.data().price,
 //       image: doc.data().image,
 //       name: doc.data().name,
 //     }))
-//     setProductList(productList)
+
+//     setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1] || null)
+
+//     console.log('produtos', products)
+//     return products
 //   }
-//   const searchProduct = async ({ query }: { query: string }) => {
-//     const products = await getProducts()
-//     const filteredProducts = Array.isArray(products)
-//       ? products.filter((product) =>
-//           product.name.toLowerCase().includes(query.toLowerCase()),
-//         )
-//       : []
-//   }
-//   useEffect(() => {
-//     getProducts()
-//   }, [])
 
 //   useEffect(() => {
+//     fetchProducts(currentPage, query, category).then(setProductList)
 //     if (newProduct) {
 //       setProductList((prevProducts) => [...prevProducts, newProduct])
 //     }
-//   }, [newProduct])
+//   }, [query, currentPage, category, newProduct])
 
 //   return (
 //     <div className={styles.containerProduct}>
-//       {productList.map((product, index) => (
-//         <div key={index} className={styles.product}>
+//       {productList.map((product) => (
+//         <div key={product.id} className={styles.product}>
 //           <div>
 //             <div>
 //               <Image
-//                 src={product.image}
+//                 src={ImageProduct}
 //                 alt="Imagem do produto"
 //                 height={206}
 //                 width={240}
@@ -73,7 +115,7 @@
 //             <strong>R$: {product.price}</strong>
 //             <button>
 //               <Link href={'/'}>
-//                 <span>🚧 Em breve</span>
+//                 <span> Em breve</span>
 //               </Link>
 //             </button>
 //           </div>
@@ -82,19 +124,27 @@
 //     </div>
 //   )
 // }
-
 // export default ContainerProducts
 
 'use client'
 
 import { useEffect, useState } from 'react'
-import { collection, getDocs, limit, orderBy } from 'firebase/firestore'
+import {
+  collection,
+  getDocs,
+  query as firestoreQuery,
+  where,
+  orderBy,
+  limit,
+  startAfter,
+  QueryDocumentSnapshot,
+  DocumentData,
+} from 'firebase/firestore'
 import { db } from '../../../config/firebase-config'
 import styles from '@/components/product/product.module.scss'
 import Image from 'next/image'
 import ImageProduct from '../../../public/images/desktop/desktop_project 1.png'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 
 export interface Product {
   id: string
@@ -107,26 +157,70 @@ export interface Product {
 interface ContainerProductsProps {
   query: string
   currentPage: number
+  category?: string
+  newProduct?: Product
+  setProductList: (product: Product[]) => void
+  productList: Product[]
+  order: string
 }
 
-const ContainerProducts: React.FC<ContainerProductsProps> = ({
+const ContainerProducts = ({
   query,
   currentPage,
-}) => {
-  const [productList, setProductList] = useState<Product[]>([])
+  category,
+  newProduct,
+  setProductList,
+  productList,
+  order,
+}: ContainerProductsProps) => {
+  const [lastVisible, setLastVisible] =
+    useState<QueryDocumentSnapshot<DocumentData> | null>(null)
 
   const fetchProducts = async (
     currentPage: number,
+    query: string,
     category?: string,
+    order?: string,
   ): Promise<Product[]> => {
-    const pageSize = 5
-    const querySnapshot = await getDocs(collection(db, 'electronicProducts'))
-    const offset = (currentPage - 1) * pageSize
-    // const first = query(
-    //   collection(db, 'electronicProducts'),
-    //   orderBy('name'),
-    //   limit(5),
-    // )
+    const pageSize = 6
+    let collectionRef = collection(db, 'electronicProducts')
+
+    let q = firestoreQuery(collectionRef, limit(pageSize))
+
+    if (category) {
+      q = firestoreQuery(q, where('category', '==', category))
+    }
+
+    if (query) {
+      q = firestoreQuery(
+        q,
+        where('name', '>=', query),
+        where('name', '<=', query + '\uf8ff'),
+      )
+    }
+
+    // Filtros de ordenação
+    switch (order) {
+      case 'menor Preco':
+        q = firestoreQuery(q, orderBy('price', 'asc'))
+        break
+      case 'maior Preco':
+        q = firestoreQuery(q, orderBy('price', 'desc'))
+        break
+      case 'Ordem Crescente':
+        q = firestoreQuery(q, orderBy('name', 'asc'))
+        break
+      case 'OrdemD ecrescente':
+        q = firestoreQuery(q, orderBy('name', 'desc'))
+        break
+    }
+
+    if (lastVisible && currentPage > 1) {
+      q = firestoreQuery(q, startAfter(lastVisible))
+    }
+
+    const querySnapshot = await getDocs(q)
+
     const products = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       equipamento: doc.data().equipamento,
@@ -135,19 +229,21 @@ const ContainerProducts: React.FC<ContainerProductsProps> = ({
       name: doc.data().name,
     }))
 
-    if (!query) return products // Early return if no query
+    setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1] || null)
 
-    const filteredProducts = products.filter((product) =>
-      product.name.toLowerCase().includes(query.toLowerCase()),
-    )
-    return filteredProducts
+    return products
   }
 
   useEffect(() => {
-    fetchProducts(currentPage).then(setProductList)
-  }, [query, currentPage])
+    fetchProducts(currentPage, query, category, order).then(setProductList)
+  }, [query, currentPage, category, order])
 
-  console.log('produtos', currentPage)
+  // useEffect(() => {
+  //   if (newProduct) {
+  //     setProductList((prevProducts: any) => [...prevProducts, newProduct])
+  //   }
+  // }, [newProduct])
+
   return (
     <div className={styles.containerProduct}>
       {productList.map((product) => (

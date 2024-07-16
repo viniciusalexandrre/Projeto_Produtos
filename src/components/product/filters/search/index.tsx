@@ -10,8 +10,6 @@ export default function SearchBar() {
   const { replace } = useRouter()
 
   const handleSearch = useDebouncedCallback((term) => {
-    // console.log(`Searching... ${term}`)
-
     const params = new URLSearchParams(searchParams)
     params.set('page', '1')
     if (term) {
@@ -43,46 +41,3 @@ export default function SearchBar() {
     </form>
   )
 }
-
-// 'use client'
-
-// import React, { useState } from 'react'
-// import Image from 'next/image'
-// import SearchIcon from '../../../../../public/icon/Filters/Search/Search_Icon.svg'
-// import styles from './search.module.scss'
-
-// interface SearchBarProps {
-//   onSearch: (term: string) => void
-// }
-
-// const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
-//   const [searchTerm, setSearchTerm] = useState('')
-
-//   const handleSearch = (term: string) => {
-//     setSearchTerm(term)
-//     if (onSearch) {
-//       onSearch(term)
-//     }
-//   }
-
-//   return (
-//     <form className={styles.search}>
-//       <input
-//         type="search"
-//         placeholder="Pesquisar"
-//         value={searchTerm}
-//         onChange={(e) => handleSearch(e.target.value)}
-//       />
-//       <button type="button">
-//         <Image
-//           src={SearchIcon}
-//           alt="Icone de pesquisa"
-//           width={20}
-//           height={20}
-//         />
-//       </button>
-//     </form>
-//   )
-// }
-
-// export default SearchBar
