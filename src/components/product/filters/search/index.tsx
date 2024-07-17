@@ -23,6 +23,7 @@ export default function SearchBar() {
   return (
     <form className={styles.search}>
       <input
+        id="search"
         type="search"
         placeholder="Pesquisar"
         onChange={(e) => {

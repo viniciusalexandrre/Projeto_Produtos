@@ -11,7 +11,7 @@ export function Select({ label, error, ...props }: SelectProps) {
     >
       <label htmlFor={props.name}>{label}</label>
       <div>
-        <select id={props.name} {...props}>
+        <select id="ordenador" {...props}>
           <option value="select">Selecione</option>
           <option value="Notebook">Notebook</option>
           <option value="Desktop">Desktop</option>
