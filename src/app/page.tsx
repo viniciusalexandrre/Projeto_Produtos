@@ -76,10 +76,10 @@ export default function Page({
             <OrderSelect
               options={[
                 'Ordenar',
-                'menor Preco',
-                'maior Preco',
-                'Ordem Crescente',
-                'Ordem Decrescente',
+                'menor preco',
+                'maior preco',
+                'ordem crescente',
+                'ordem decrescente',
               ]}
               defaultOption="Ordenar"
               setOrder={setOrder}

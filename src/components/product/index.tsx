@@ -1,3 +1,5 @@
+// antigo
+
 // 'use client'
 
 // import { useEffect, useState } from 'react'
@@ -33,16 +35,20 @@
 //   newProduct?: Product
 //   setProductList: (product: Product[]) => void
 //   productList: Product[]
+//   order: string
+//   filters: { equipamento: string[]; price: string[] }
 // }
+
 // const ContainerProducts = ({
 //   query,
 //   currentPage,
 //   category,
 //   newProduct,
-//   // setProductList,
-//   // productList
+//   setProductList,
+//   productList,
+//   order,
+//   filters,
 // }: ContainerProductsProps) => {
-//   const [productList, setProductList] = useState<Product[]>([])
 //   const [lastVisible, setLastVisible] =
 //     useState<QueryDocumentSnapshot<DocumentData> | null>(null)
 
@@ -50,11 +56,27 @@
 //     currentPage: number,
 //     query: string,
 //     category?: string,
+//     order?: string,
 //   ): Promise<Product[]> => {
-//     const pageSize = 5
-//     let querySnapshot = collection(db, 'electronicProducts')
+//     const pageSize = 6
+//     let collectionRef = collection(db, 'electronicProducts')
 
-//     let q = firestoreQuery(collectionRef, orderBy('name'), limit(pageSize))
+//     // Build the query
+//     let q = firestoreQuery(
+//       collectionRef,
+//       limit(pageSize),
+//       orderBy(
+//         order === 'menor preco' || order === 'maior preco' ? 'price' : 'name',
+//         order === 'menor preco' || order === 'ordem descrente' ? 'asc' : 'desc',
+//       ),
+//     )
+
+//     let menu = firestoreQuery(
+//       collectionRef,
+//       limit(pageSize),
+//       where('equipemento', '==', 'notebook'),
+//     )
+//     // Apply filters
 //     if (category) {
 //       q = firestoreQuery(q, where('category', '==', category))
 //     }
@@ -67,9 +89,11 @@
 //       )
 //     }
 
-//     if (lastVisible && currentPage > 1) {
-//       q = firestoreQuery(q, startAfter(lastVisible))
-//     }
+//     if (filters.equipamento)
+//       if (lastVisible && currentPage > 1) {
+//         // Pagination
+//         q = firestoreQuery(q, startAfter(lastVisible))
+//       }
 
 //     const querySnapshot = await getDocs(q)
 
@@ -83,16 +107,18 @@
 
 //     setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1] || null)
 
-//     console.log('produtos', products)
 //     return products
 //   }
 
 //   useEffect(() => {
-//     fetchProducts(currentPage, query, category).then(setProductList)
-//     if (newProduct) {
-//       setProductList((prevProducts) => [...prevProducts, newProduct])
-//     }
-//   }, [query, currentPage, category, newProduct])
+//     fetchProducts(currentPage, query, category, order).then(setProductList)
+//   }, [query, currentPage, category, order])
+
+//   // useEffect(() => {
+//   //   if (newProduct) {
+//   //     setProductList((prevProducts: any) => [...prevProducts, newProduct])
+//   //   }
+//   // }, [newProduct])
 
 //   return (
 //     <div className={styles.containerProduct}>
@@ -162,6 +188,7 @@ interface ContainerProductsProps {
   setProductList: (product: Product[]) => void
   productList: Product[]
   order: string
+  filters: { equipamento: string[]; price: string[] }
 }
 
 const ContainerProducts = ({
@@ -172,6 +199,7 @@ const ContainerProducts = ({
   setProductList,
   productList,
   order,
+  filters,
 }: ContainerProductsProps) => {
   const [lastVisible, setLastVisible] =
     useState<QueryDocumentSnapshot<DocumentData> | null>(null)
@@ -185,8 +213,22 @@ const ContainerProducts = ({
     const pageSize = 6
     let collectionRef = collection(db, 'electronicProducts')
 
-    let q = firestoreQuery(collectionRef, limit(pageSize))
+    // Build the query
+    let q = firestoreQuery(
+      collectionRef,
+      limit(pageSize),
+      orderBy(
+        order === 'menor preco' || order === 'maior preco' ? 'price' : 'name',
+        order === 'menor preco' || order === 'ordem descrente' ? 'asc' : 'desc',
+      ),
+    )
 
+    let menu = firestoreQuery(
+      collectionRef,
+      limit(pageSize),
+      where('equipemento', '==', 'notebook'),
+    )
+    // Apply filters
     if (category) {
       q = firestoreQuery(q, where('category', '==', category))
     }
@@ -199,23 +241,15 @@ const ContainerProducts = ({
       )
     }
 
-    // Filtros de ordenação
-    switch (order) {
-      case 'menor Preco':
-        q = firestoreQuery(q, orderBy('price', 'asc'))
-        break
-      case 'maior Preco':
-        q = firestoreQuery(q, orderBy('price', 'desc'))
-        break
-      case 'Ordem Crescente':
-        q = firestoreQuery(q, orderBy('name', 'asc'))
-        break
-      case 'OrdemD ecrescente':
-        q = firestoreQuery(q, orderBy('name', 'desc'))
-        break
+    if (filters.equipamento.length > 0) {
+      q = firestoreQuery(q, where('equipemento', 'in', filters.equipamento))
     }
 
+    // if (filters.price) {
+    //   q = firestoreQuery(q, orderBy('price', filters.price === 'lowestPrice' ? 'asc' : 'desc'))
+    // }
     if (lastVisible && currentPage > 1) {
+      // Pagination
       q = firestoreQuery(q, startAfter(lastVisible))
     }
 
@@ -236,7 +270,7 @@ const ContainerProducts = ({
 
   useEffect(() => {
     fetchProducts(currentPage, query, category, order).then(setProductList)
-  }, [query, currentPage, category, order])
+  }, [query, currentPage, category, order, filters])
 
   // useEffect(() => {
   //   if (newProduct) {
