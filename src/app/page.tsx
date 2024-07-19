@@ -1,5 +1,3 @@
-//Antigo Page
-
 'use client'
 
 import '../styles/globals.scss'
@@ -30,7 +28,9 @@ export default function Page({
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [newProduct, setNewProduct] = useState<Product | undefined>(undefined)
   const [productList, setProductList] = useState<Product[]>([])
-  const [order, setOrder] = useState<string>('OrdemCrescente')
+  const [order, setOrder] = useState<string>('')
+  const [category, setCategory] = useState<string | undefined>(undefined)
+  const [filters, setFilters] = useState<string[]>([])
 
   const handleProductAdded = (product: Product) => {
     setNewProduct(product)
@@ -70,7 +70,7 @@ export default function Page({
             onClose={() => setIsModalOpen(false)}
             onProductAdded={handleProductAdded}
           />
-          <Menu />
+          <Menu setCategory={setCategory} setFilters={setFilters} />
           <div>
             <SearchBar />
             <OrderSelect
@@ -92,6 +92,8 @@ export default function Page({
             setProductList={setProductList}
             order={order}
             newProduct={newProduct}
+            category={category}
+            filters={filters}
           />
           <Pagination totalPages={2} />
         </div>

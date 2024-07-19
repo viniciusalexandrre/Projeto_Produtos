@@ -1,5 +1,3 @@
-// antigo
-
 // 'use client'
 
 // import { useEffect, useState } from 'react'
@@ -65,16 +63,14 @@
 //     let q = firestoreQuery(
 //       collectionRef,
 //       limit(pageSize),
+//       // where('equipamento', '==', 'notebook'),
 //       orderBy(
-//         order === 'menor preco' || order === 'maior preco' ? 'price' : 'name',
-//         order === 'menor preco' || order === 'ordem descrente' ? 'asc' : 'desc',
+//         order === 'menor' ? 'price' : 'nome',
+//         order === 'menor preco' || order === 'ordem decrescente'
+//           ? 'asc'
+//           : 'desc',
 //       ),
-//     )
-
-//     let menu = firestoreQuery(
-//       collectionRef,
-//       limit(pageSize),
-//       where('equipemento', '==', 'notebook'),
+//       // orderBy('equipamento', 'asc'),
 //     )
 //     // Apply filters
 //     if (category) {
@@ -89,11 +85,21 @@
 //       )
 //     }
 
-//     if (filters.equipamento)
-//       if (lastVisible && currentPage > 1) {
-//         // Pagination
-//         q = firestoreQuery(q, startAfter(lastVisible))
-//       }
+//     if (filters.equipamento.length > 0 && filters.price.length > 0) {
+//       q = firestoreQuery(
+//         q,
+//         where('price', '>=', filters.price[0]),
+//         where('price', '<=', filters.price[1]),
+//       )
+//     }
+
+//     // if (filters.price) {
+//     //   q = firestoreQuery(q, orderBy('price', filters.price === 'lowestPrice' ? 'asc' : 'desc'))
+//     // }
+//     if (lastVisible && currentPage > 1) {
+//       // Pagination
+//       q = firestoreQuery(q, startAfter(lastVisible))
+//     }
 
 //     const querySnapshot = await getDocs(q)
 
@@ -105,8 +111,10 @@
 //       name: doc.data().name,
 //     }))
 
+//     // console.log('produtos', products)
 //     setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1] || null)
 
+//     console.log('produtos', products)
 //     return products
 //   }
 
@@ -188,7 +196,7 @@ interface ContainerProductsProps {
   setProductList: (product: Product[]) => void
   productList: Product[]
   order: string
-  filters: { equipamento: string[]; price: string[] }
+  filters: { equipamento: string[] }
 }
 
 const ContainerProducts = ({
@@ -209,6 +217,7 @@ const ContainerProducts = ({
     query: string,
     category?: string,
     order?: string,
+    filters?: { equipamento: string[] },
   ): Promise<Product[]> => {
     const pageSize = 6
     let collectionRef = collection(db, 'electronicProducts')
@@ -219,14 +228,8 @@ const ContainerProducts = ({
       limit(pageSize),
       orderBy(
         order === 'menor preco' || order === 'maior preco' ? 'price' : 'name',
-        order === 'menor preco' || order === 'ordem descrente' ? 'asc' : 'desc',
+        order === 'menor preco' || order === 'ordem crescente' ? 'asc' : 'desc',
       ),
-    )
-
-    let menu = firestoreQuery(
-      collectionRef,
-      limit(pageSize),
-      where('equipemento', '==', 'notebook'),
     )
     // Apply filters
     if (category) {
@@ -241,13 +244,11 @@ const ContainerProducts = ({
       )
     }
 
-    if (filters.equipamento.length > 0) {
-      q = firestoreQuery(q, where('equipemento', 'in', filters.equipamento))
+    //Filtrando por equipamento
+    if (filters?.equipamento?.length) {
+      q = firestoreQuery(q, where('equipamento', '==', 'Notebook'))
     }
 
-    // if (filters.price) {
-    //   q = firestoreQuery(q, orderBy('price', filters.price === 'lowestPrice' ? 'asc' : 'desc'))
-    // }
     if (lastVisible && currentPage > 1) {
       // Pagination
       q = firestoreQuery(q, startAfter(lastVisible))
@@ -265,11 +266,14 @@ const ContainerProducts = ({
 
     setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1] || null)
 
+    console.log('produtos', products)
     return products
   }
 
   useEffect(() => {
-    fetchProducts(currentPage, query, category, order).then(setProductList)
+    fetchProducts(currentPage, query, category, order, filters).then(
+      setProductList,
+    )
   }, [query, currentPage, category, order, filters])
 
   // useEffect(() => {

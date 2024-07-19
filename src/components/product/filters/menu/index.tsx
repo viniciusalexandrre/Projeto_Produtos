@@ -4,20 +4,26 @@
 // import CloseIcon from '../../../../../public/icon/Filters/Menu/X-Icon.svg'
 // import CaretDown from '../../../../../public/icon/Filters/Menu/caret-down.svg'
 // import styles from './menu.module.scss'
-// import { useEffect, useState } from 'react'
+// import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
-// export default function Menu() {
+// interface MenuProps {
+//   setCategory: Dispatch<SetStateAction<string | undefined>>
+//   setSelectedEquipamento: Dispatch<SetStateAction<string[]>>
+// }
+// export default function Menu({
+//   setCategory,
+//   setSelectedEquipamento,
+// }: MenuProps) {
 //   const [menuIsVisible, setMenuIsVisible] = useState(false)
 //   const [equipmentIsVisible, setEquipamentIsVisible] = useState(false)
 //   const [priceIsVisible, setpriceIsVisible] = useState(false)
-//   const [selectedCheckbox, setSelectCheckbox] = useState<string[]>([])
 
-//   const handleOnChange = (e: any) => {
-//     const checkboxId = e.target.id
-//     setSelectCheckbox((prev) =>
+//   const handleEquipmentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     const equipment = e.target.id
+//     setSelectedEquipamento((prev) =>
 //       e.target.checked
-//         ? [...prev, checkboxId]
-//         : prev.filter((id) => id !== checkboxId),
+//         ? [...prev, equipment]
+//         : prev.filter((item) => item !== equipment),
 //     )
 //   }
 
@@ -27,13 +33,10 @@
 //       setpriceIsVisible(false)
 //   }, [])
 
-//   console.log('checked', selectedCheckbox)
-//   const isChecked = (id: string) => selectedCheckbox.includes(id)
-
 //   return (
 //     <div className={styles.menu}>
 //       {menuIsVisible ? (
-//         <div className={styles.isOpen} id="open">
+//         <div className={styles.isOpen}>
 //           <div>
 //             <strong>Equipamento</strong>
 //             <button onClick={() => setMenuIsVisible(!menuIsVisible)}>
@@ -61,8 +64,7 @@
 //                     <input
 //                       type="checkbox"
 //                       id="notebook"
-//                       checked={isChecked('notebook')}
-//                       onChange={handleOnChange}
+//                       onChange={handleEquipmentChange}
 //                     />
 //                     <label htmlFor="notebook">Notebook</label>
 //                   </div>
@@ -70,8 +72,7 @@
 //                     <input
 //                       type="checkbox"
 //                       id="console"
-//                       checked={isChecked('console')}
-//                       onChange={handleOnChange}
+//                       onChange={handleEquipmentChange}
 //                     />
 //                     <label htmlFor="console">Console</label>
 //                   </div>
@@ -79,8 +80,7 @@
 //                     <input
 //                       type="checkbox"
 //                       id="desktop"
-//                       checked={isChecked('desktop')}
-//                       onChange={handleOnChange}
+//                       onChange={handleEquipmentChange}
 //                     />
 //                     <label htmlFor="desktop">Desktop</label>
 //                   </div>
@@ -131,25 +131,35 @@ import MenuIcon from '../../../../../public/icon/Filters/Menu/Menu_Icon.svg'
 import CloseIcon from '../../../../../public/icon/Filters/Menu/X-Icon.svg'
 import CaretDown from '../../../../../public/icon/Filters/Menu/caret-down.svg'
 import styles from './menu.module.scss'
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 interface MenuProps {
-  setFilters: (filters: { equipamento: string[]; price: string }) => void
+  setCategory: Dispatch<SetStateAction<string | undefined>>
+  setSelectedEquipamento: Dispatch<SetStateAction<string[]>>
+  setFilters: Dispatch<SetStateAction<{ equipamento: string[] }>>
 }
-export default function Menu({ setFilters }: MenuProps) {
+export default function Menu({
+  setCategory,
+  setSelectedEquipamento,
+  setFilters,
+}: MenuProps) {
   const [menuIsVisible, setMenuIsVisible] = useState(false)
   const [equipmentIsVisible, setEquipamentIsVisible] = useState(false)
   const [priceIsVisible, setpriceIsVisible] = useState(false)
-  const [selectedCheckbox, setSelectCheckbox] = useState<string[]>([])
-  const [selectPrice, setSelectPrice] = useState<string>('')
 
-  const handleOnChange = (e: any) => {
-    const checkboxId = e.target.id
-    setSelectCheckbox((prev) =>
-      e.target.checked
-        ? [...prev, checkboxId]
-        : prev.filter((id) => id !== checkboxId),
-    )
+  const handleFiltersChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const equipment = e.target.id
+    // setSelectedEquipamento((prev) =>
+    //   e.target.checked
+    //     ? [...prev, equipment]
+    //     : prev.filter((item) => item !== equipment),
+    // )
+    setFilters((prev) => ({
+      ...prev,
+      equipamento: e.target.checked
+        ? [...prev.equipamento, equipment]
+        : prev.equipamento.filter((item) => item !== equipment),
+    }))
   }
 
   useEffect(() => {
@@ -158,20 +168,10 @@ export default function Menu({ setFilters }: MenuProps) {
       setpriceIsVisible(false)
   }, [])
 
-  useEffect(() => {
-    setFilters({
-      equipamento: selectedCheckbox,
-      price: selectPrice,
-    })
-  })
-
-  console.log('checked', selectedCheckbox)
-  const isChecked = (id: string) => selectedCheckbox.includes(id)
-
   return (
     <div className={styles.menu}>
       {menuIsVisible ? (
-        <div className={styles.isOpen} id="open">
+        <div className={styles.isOpen}>
           <div>
             <strong>Equipamento</strong>
             <button onClick={() => setMenuIsVisible(!menuIsVisible)}>
@@ -199,8 +199,7 @@ export default function Menu({ setFilters }: MenuProps) {
                     <input
                       type="checkbox"
                       id="notebook"
-                      checked={isChecked('notebook')}
-                      onChange={handleOnChange}
+                      onChange={handleFiltersChange}
                     />
                     <label htmlFor="notebook">Notebook</label>
                   </div>
@@ -208,8 +207,7 @@ export default function Menu({ setFilters }: MenuProps) {
                     <input
                       type="checkbox"
                       id="console"
-                      checked={isChecked('console')}
-                      onChange={handleOnChange}
+                      onChange={handleFiltersChange}
                     />
                     <label htmlFor="console">Console</label>
                   </div>
@@ -217,8 +215,7 @@ export default function Menu({ setFilters }: MenuProps) {
                     <input
                       type="checkbox"
                       id="desktop"
-                      checked={isChecked('desktop')}
-                      onChange={handleOnChange}
+                      onChange={handleFiltersChange}
                     />
                     <label htmlFor="desktop">Desktop</label>
                   </div>
