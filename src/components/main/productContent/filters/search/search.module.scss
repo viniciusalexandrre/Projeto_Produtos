@@ -1,0 +1,34 @@
+.search {
+  width: 100%;
+  max-width: 378px;
+  position: relative;
+  display: flex;
+
+  & > input {
+    width: 100%;
+    max-width: 378px;
+    padding: 16px 14px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    box-shadow: 2px 2px 0px 0px #000;
+    outline: 0;
+    font-size: 14px;
+    font-family: '__monaSans_fe06ff';
+    height: 44px;
+  }
+  & > button {
+    position: absolute;
+    padding: 4px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    box-shadow: 2px 2px 0px 0px #000;
+    background-color: #dd7ddf;
+    width: 100%;
+    max-width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 14px;
+    top: 6px;
+  }
+}
