@@ -1,14 +1,15 @@
-// MainContent.tsx
-// MainContent.tsx
+'use client'
+
 import React, { useState } from 'react'
 import { Dispatch, SetStateAction } from 'react'
-import { Modal } from '../modal'
-import ContainerProducts, { Product } from '../product'
-import Menu from '../product/filters/menu'
-import { Pagination } from '../product/filters/pagination'
-import SearchBar from '../product/filters/search'
-import { OrderSelect } from '../product/filters/select'
+
+import Menu from './productContent/filters/menu'
+import { Pagination } from './productContent/filters/pagination'
+import SearchBar from './productContent/filters/search'
+import { OrderSelect } from './productContent/filters/select'
 import styles from './main.module.scss'
+import { Modal } from './productContent/modal'
+import { ContainerProducts, Product } from './productContent'
 
 interface MainProps {
   query: string
@@ -46,6 +47,7 @@ export const MainContent = ({
   newProduct,
 }: MainProps) => {
   const [menuVisible, setMenuVisible] = useState(menuOpen)
+  const totalPages = useState()
 
   const handleProductAdded = (product: Product) => {
     setNewProduct(product)
@@ -96,7 +98,7 @@ export const MainContent = ({
           filters={filters}
           menuOpen={menuVisible}
         />
-        <Pagination totalPages={2} />
+        <Pagination totalPages={totalPages} />
       </div>
     </main>
   )

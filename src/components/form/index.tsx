@@ -7,11 +7,11 @@ import ImageProduct from '../../../public/images/desktop/desktop_project 1.png'
 import secondDetail from '../../../public/icon/Modal/detalhes/Detalhe_2.svg'
 import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../../../config/firebase-config'
-import { Product } from '../product'
 import { Input, InputFile } from './input'
 import Button from './button'
 import { validateForm } from '@/helper/validationForm/validation'
 import { Select } from './select'
+import { Product } from '../main/productContent'
 
 interface FormProps {
   registrationSuccess: (newProduct: Product) => void
