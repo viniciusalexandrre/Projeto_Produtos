@@ -135,38 +135,32 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 interface MenuProps {
   setCategory: Dispatch<SetStateAction<string | undefined>>
-  setSelectedEquipamento: Dispatch<SetStateAction<string[]>>
   setFilters: Dispatch<SetStateAction<{ equipamento: string[] }>>
+  onMenuToggle: (isVisible: boolean) => void // Adicione esta prop
 }
+
 export default function Menu({
   setCategory,
-  setSelectedEquipamento,
   setFilters,
+  onMenuToggle,
 }: MenuProps) {
   const [menuIsVisible, setMenuIsVisible] = useState(false)
   const [equipmentIsVisible, setEquipamentIsVisible] = useState(false)
-  const [priceIsVisible, setpriceIsVisible] = useState(false)
+  const [priceIsVisible, setPriceIsVisible] = useState(false)
 
   const handleFiltersChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const equipment = e.target.id
-    // setSelectedEquipamento((prev) =>
-    //   e.target.checked
-    //     ? [...prev, equipment]
-    //     : prev.filter((item) => item !== equipment),
-    // )
     setFilters((prev) => ({
       ...prev,
       equipamento: e.target.checked
         ? [...prev.equipamento, equipment]
-        : prev.equipamento.filter((item) => item !== equipment),
+        : (prev.equipamento || []).filter((item) => item !== equipment),
     }))
   }
 
   useEffect(() => {
-    setMenuIsVisible(false),
-      setEquipamentIsVisible(false),
-      setpriceIsVisible(false)
-  }, [])
+    onMenuToggle(menuIsVisible)
+  }, [menuIsVisible, onMenuToggle])
 
   return (
     <div className={styles.menu}>
@@ -179,7 +173,7 @@ export default function Menu({
                 src={CloseIcon}
                 width={20}
                 height={20}
-                alt="Icone de fechar o menu"
+                alt="Ícone de fechar o menu"
               />
             </button>
           </div>
@@ -225,19 +219,27 @@ export default function Menu({
             <div>
               <div>
                 <strong>Preço</strong>
-                <button onClick={() => setpriceIsVisible(!priceIsVisible)}>
+                <button onClick={() => setPriceIsVisible(!priceIsVisible)}>
                   <Image src={CaretDown} height={16} width={16} alt="Detalhe" />
                 </button>
               </div>
               {priceIsVisible && (
                 <div>
                   <div>
-                    <input type="checkbox" id="lowestPrice" />
-                    <label htmlFor="price">Menor preço</label>
+                    <input
+                      type="checkbox"
+                      id="lowestPrice"
+                      onChange={() => setCategory('menor preco')}
+                    />
+                    <label htmlFor="lowestPrice">Menor preço</label>
                   </div>
                   <div>
-                    <input type="checkbox" id="biggestPrice" />
-                    <label htmlFor="price">Maior preço</label>
+                    <input
+                      type="checkbox"
+                      id="biggestPrice"
+                      onChange={() => setCategory('maior preco')}
+                    />
+                    <label htmlFor="biggestPrice">Maior preço</label>
                   </div>
                 </div>
               )}
@@ -251,7 +253,7 @@ export default function Menu({
               src={MenuIcon}
               width={20}
               height={20}
-              alt={'Icone do menu'}
+              alt={'Ícone do menu'}
             />
           </Link>
         </button>

@@ -1,40 +1,85 @@
-import { useState } from 'react'
+// MainContent.tsx
+// MainContent.tsx
+import React, { useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import { Modal } from '../modal'
 import ContainerProducts, { Product } from '../product'
 import Menu from '../product/filters/menu'
 import { Pagination } from '../product/filters/pagination'
 import SearchBar from '../product/filters/search'
 import { OrderSelect } from '../product/filters/select'
+import styles from './main.module.scss'
 
-export default function Main({
-  searchParams,
-}: {
-  searchParams?: {
-    query?: string
-    page?: number
+interface MainProps {
+  query: string
+  currentPage: number
+  setProductList: Dispatch<SetStateAction<Product[]>>
+  productList: Product[]
+  order: string
+  category?: string
+  filters: { equipamento: string[] }
+  modalOpen: boolean
+  menuOpen: boolean
+  setCategory: Dispatch<SetStateAction<string | undefined>>
+  setFilters: Dispatch<SetStateAction<{ equipamento: string[] }>>
+  setOrder: Dispatch<SetStateAction<string>>
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>
+  setNewProduct: Dispatch<SetStateAction<Product | undefined>>
+  newProduct?: Product
+}
+
+export const MainContent = ({
+  query,
+  currentPage,
+  setProductList,
+  productList,
+  order,
+  category,
+  filters,
+  modalOpen,
+  menuOpen,
+  setCategory,
+  setFilters,
+  setOrder,
+  setIsModalOpen,
+  setNewProduct,
+  newProduct,
+}: MainProps) => {
+  const [menuVisible, setMenuVisible] = useState(menuOpen)
+
+  const handleProductAdded = (product: Product) => {
+    setNewProduct(product)
+    setIsModalOpen(false)
   }
-}) {
-  const query = searchParams?.query || ''
-  const currentPage = Number(searchParams?.page) || 1
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [menuIsVisible, setMenuIsVisible] = useState(false)
-  const [newProduct, setNewProduct] = useState<Product | undefined>(undefined)
-  const [productList, setProductList] = useState<Product[]>([])
-  const [order, setOrder] = useState<string>('OrdemCrescente')
+
+  const handleMenuToggle = (isVisible: boolean) => {
+    setMenuVisible(isVisible)
+  }
 
   return (
-    <main>
-      <div>
-        <Menu />
+    <main className={styles.mainContent}>
+      <div
+        className={`${styles.content} ${menuVisible ? styles.menuOpen : ''}`}
+      >
+        <Modal
+          isOpen={modalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onProductAdded={handleProductAdded}
+        />
+        <Menu
+          setCategory={setCategory}
+          setFilters={setFilters}
+          onMenuToggle={handleMenuToggle}
+        />
         <div>
           <SearchBar />
           <OrderSelect
             options={[
               'Ordenar',
-              'menor Preco',
-              'maior Preco',
-              'Ordem Crescente',
-              'Ordem Decrescente',
+              'menor preco',
+              'maior preco',
+              'ordem crescente',
+              'ordem decrescente',
             ]}
             defaultOption="Ordenar"
             setOrder={setOrder}
@@ -46,6 +91,10 @@ export default function Main({
           productList={productList}
           setProductList={setProductList}
           order={order}
+          newProduct={newProduct}
+          category={category}
+          filters={filters}
+          menuOpen={menuVisible}
         />
         <Pagination totalPages={2} />
       </div>
