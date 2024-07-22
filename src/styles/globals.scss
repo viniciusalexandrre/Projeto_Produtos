@@ -87,38 +87,6 @@ header {
     }
   }
 }
-main {
-  // display: grid;
-  background-image: url('../../public/images/background.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-
-  & > div:nth-child(1) {
-    display: grid;
-    // width: 100%;
-    max-width: 1323px;
-    margin: 0 auto;
-    padding: 0rem 2rem;
-    position: relative;
-    gap: 28px;
-    // grid-template-columns: 44px 1fr;
-    grid-template-columns: 415px 1fr;
-    grid-template-areas:
-      'menu containerFilters'
-      'containerProduct containerProduct'
-      'pagination pagination';
-    padding-top: 100px;
-
-    & > div:nth-child(2) {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      max-width: 1248px;
-      grid-area: containerFilters;
-    }
-  }
-}
 
 ul {
   list-style-type: none;

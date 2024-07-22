@@ -1,6 +1,7 @@
 .menu {
   display: grid;
   grid-area: menu;
+  height: 112px;
   & > button {
     background-color: #dd7ddf;
     border-radius: 10px;
@@ -27,6 +28,12 @@
     border: 1px solid #000;
     // border-radius: 10px;
     box-shadow: 4px 4px 0px 0px #000;
+    z-index: 2;
+
+    @media (max-width: 1100px) {
+      position: absolute;
+      max-width: 230px;
+    }
 
     & > div:nth-child(1) {
       display: flex;

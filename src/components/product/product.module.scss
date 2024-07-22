@@ -115,3 +115,22 @@
     animation-duration: 2.8s;
   }
 }
+
+.menuOpen {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 100px;
+  max-width: 1318px;
+  margin-bottom: 100px;
+  gap: 32px;
+  grid-area: containerProduct;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 680px) {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+}
