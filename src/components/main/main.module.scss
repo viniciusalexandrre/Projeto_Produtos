@@ -43,6 +43,10 @@
 
     @media (max-width: 1100px) {
       grid-template-columns: 44px 1fr;
+      grid-template-areas:
+        'menu containerFilters'
+        'containerProduct containerProduct'
+        'pagination pagination';
     }
   }
 }
