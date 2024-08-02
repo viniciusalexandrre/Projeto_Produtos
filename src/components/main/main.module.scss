@@ -3,6 +3,9 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  .changeBackground {
+    background-color: red;
+  }
 
   & > .content {
     display: grid;
@@ -49,4 +52,7 @@
         'pagination pagination';
     }
   }
+}
+.changeBackground {
+  background-color: red;
 }

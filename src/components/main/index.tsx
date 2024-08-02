@@ -59,7 +59,9 @@ export const MainContent = ({
   }
 
   return (
-    <main className={styles.mainContent}>
+    <main
+      className={`${styles.mainContent} ${menuVisible ? styles.changeBackground : ''}`}
+    >
       <div
         className={`${styles.content} ${menuVisible ? styles.menuOpen : ''}`}
       >
@@ -98,7 +100,7 @@ export const MainContent = ({
           filters={filters}
           menuOpen={menuVisible}
         />
-        <Pagination totalPages={totalPages} />
+        <Pagination totalPages={2} />
       </div>
     </main>
   )
